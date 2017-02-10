@@ -1,0 +1,64 @@
+<head>
+<title>leaderboard</title>
+
+</head>
+
+
+<body>
+<div class = "container">
+{{ > menu}}
+<div class = "encircle"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></div>
+
+{{> leaderboard}}
+{{> userProfile}}
+</div>
+
+</body>
+
+<template name = "leaderboard">
+
+{{#if currentUser}}
+{{ > addPlayerForm}}
+	<ul>
+		{{#each player}}
+		<li class = "player {{selectedClass}}"> <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>  &#160;&#160;{{name}} : {{score}}</li>
+		{{/each}}
+
+		{{#if selectedPlayer}}
+	<li> Selected Player: {{selectedPlayer.name}}</li>
+	<li> No Players: {{count}}</li>
+	<li>
+	<button class = "btn btn-success increment"> Give 5 Points</button>
+	<button class = "btn btn-warning decrement"> Take 5 Points</button>
+	<button class = "btn btn-danger remove">Remove Player</button>
+	</li>
+
+	{{else}}
+	<li>No player selected</li>
+	{{/if}}
+	</ul>
+
+	{{else}}
+	<p> You must be logged in to see this content</p>
+	{{/if}}
+
+</template>
+<template name = "addPlayerForm">
+<form>
+<input type = "text" name = "playerName" required>
+<input type ="text" name = "playerValue" size = "3" required>
+<input type = "submit" value = "Add Player">
+
+</form>
+</template>
+
+<template name = "userProfile">
+<button class = "userButton">  See users </button>
+<ul>
+{{#each userList}}
+		<li class = "player {{selectedClass}}"> <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>  &#160;&#160;{{userList.username}}</li>
+{{/each}}
+	</ul>
+
+
+</template>
